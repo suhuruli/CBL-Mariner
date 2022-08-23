@@ -8,6 +8,8 @@ Distribution:   Mariner
 Group:          System Environment/Daemons
 URL:            https://github.com/kubernetes/node-problem-detector
 Source0:        https://github.com/kubernetes/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:        node-problem-detector-startup.sh
+Source2:        node-problem-detector.service
 Patch0:         001-remove_arch_specific_makefile_logic.patch
 Patch1:         002-add_mariner_OSVersion.patch
 BuildRequires:  golang
@@ -37,7 +39,8 @@ Default configuration files for node-problem-detector
 
 %install
 mkdir -p %{buildroot}%{_bindir}/
-install -vdm 755 %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}%{_unitdir}/
+install -vdm 755 %{buildroot}%{_bindir}
 install -pm 755 output/linux/bin/node-problem-detector %{buildroot}%{_bindir}/
 install -pm 755 output/linux/bin/health-checker %{buildroot}%{_bindir}/
 install -pm 755 output/linux/bin/log-counter %{buildroot}%{_bindir}/
@@ -48,8 +51,20 @@ cp -R config %{buildroot}%{_sysconfdir}/node-problem-detector.d
 chmod 755 %{buildroot}%{_sysconfdir}/node-problem-detector.d/config/plugin/check_ntp.sh
 chmod 755 %{buildroot}%{_sysconfdir}/node-problem-detector.d/config/plugin/network_problem.sh
 
+install -pm 755 %{SOURCE1} %{buildroot}%{_bindir}/node-problem-detector-startup.sh
+install -pm 644 %{SOURCE2} %{buildroot}%{_unitdir}/node-problem-detector.service
+
 %check
 make test
+
+%post
+%systemd_post node-problem-detector.service
+ 
+%preun
+%systemd_preun node-problem-detector.service
+ 
+%postun
+%systemd_postun_with_restart node-problem-detector.service
 
 %files
 %license LICENSE
@@ -57,6 +72,8 @@ make test
 %{_bindir}/node-problem-detector
 %{_bindir}/health-checker
 %{_bindir}/log-counter
+%{_bindir}/node-problem-detector-startup.sh
+%{_unitdir}/node-problem-detector.service
 
 %files config
 %license LICENSE
@@ -65,7 +82,8 @@ make test
 
 %changelog
 * Tue Aug 16 2022 Sean Dougherty <sdougherty@microsoft.com> - 0.8.10-4
-- Removed arch-specific logic in Makefile via 
+- Removed arch-specific logic in Makefile via new patch
+- Added node-problem-detector daemon for supporting the monitoring of kubernetes clusters
 
 * Tue Jun 14 2022 Muhammad Falak <mwani@microsoft.com> - 0.8.10-3
 - Bump release to rebuild with golang 1.18.3
