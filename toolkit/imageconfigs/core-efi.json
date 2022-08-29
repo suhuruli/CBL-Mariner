@@ -50,7 +50,7 @@
                 "packagelists/cloud-init-packages.json"
             ],
             "KernelOptions": {
-                "default": "kernel"
+                "default": "kernel-hci"
             },
             "Hostname": "cbl-mariner"
         }
