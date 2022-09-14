@@ -1,0 +1,8 @@
+{
+    "packages": [
+        "efibootmgr",
+        "librsync",
+        "parted",
+        "nano"
+    ]
+}
