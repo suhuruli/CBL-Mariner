@@ -2017,6 +2017,10 @@
                 "libsafec",
                 "libuv",
                 "libxml++",
+                "livepatch-5.15.32.1-1.cm2",
+                "livepatch-5.15.48.1-1.cm2",
+                "livepatch-signed-5.15.32.1-1.cm2",
+                "livepatch-signed-5.15.48.1-1.cm2",
                 "livepatching",
                 "lld",
                 "local-path-provisioner",
@@ -2837,8 +2841,8 @@
             "license": "[ASL 2.0 License](http://www.apache.org/licenses/LICENSE-2.0)",
             "specs": [
                 "k3s",
-                "k3s-1.24.3",
-                "k3s-1.23.8"
+                "k3s-1.23.8",
+                "k3s-1.24.3"
             ]
         },
         "Sysbench source": {

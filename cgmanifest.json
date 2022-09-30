@@ -10840,6 +10840,26 @@
       "component": {
         "type": "other",
         "other": {
+          "name": "livepatch-5.15.32.1-1.cm2",
+          "version": "1.0.0",
+          "downloadUrl": "https://github.com/microsoft/CBL-Mariner-Linux-Kernel/archive/rolling-lts/mariner-2/5.15.32.1.tar.gz"
+        }
+      }
+    },
+    {
+      "component": {
+        "type": "other",
+        "other": {
+          "name": "livepatch-5.15.48.1-1.cm2",
+          "version": "1.0.0",
+          "downloadUrl": "https://github.com/microsoft/CBL-Mariner-Linux-Kernel/archive/rolling-lts/mariner-2/5.15.48.1.tar.gz"
+        }
+      }
+    },
+    {
+      "component": {
+        "type": "other",
+        "other": {
           "name": "lksctp-tools",
           "version": "1.0.18",
           "downloadUrl": "https://github.com/sctp/lksctp-tools/archive/lksctp-tools-1.0.18.tar.gz"
@@ -10863,16 +10883,6 @@
           "name": "lldb",
           "version": "12.0.1",
           "downloadUrl": "https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/lldb-12.0.1.src.tar.xz"
-        }
-      }
-    },
-    {
-      "component": {
-        "type": "other",
-        "other": {
-          "name": "local-path-provisioner",
-          "version": "0.0.21",
-          "downloadUrl": "https://github.com/rancher/local-path-provisioner/archive/refs/tags/v0.0.21.tar.gz"
         }
       }
     },
@@ -10923,6 +10933,16 @@
           "name": "lmdb",
           "version": "0.9.29",
           "downloadUrl": "https://github.com/LMDB/lmdb/archive/LMDB_0.9.29.tar.gz"
+        }
+      }
+    },
+    {
+      "component": {
+        "type": "other",
+        "other": {
+          "name": "local-path-provisioner",
+          "version": "0.0.21",
+          "downloadUrl": "https://github.com/rancher/local-path-provisioner/archive/refs/tags/v0.0.21.tar.gz"
         }
       }
     },
