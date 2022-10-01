@@ -1,6 +1,6 @@
 %global debug_package %{nil}
 
-%define kernel_version_release 5.15.48.1-1.cm2
+%define kernel_version_release 5.15.32.1-3.cm2
 %define kernel_version %(echo %{kernel_version_release} | grep -oP "^[^-]+")
 %define kernel_release %(echo %{kernel_version_release} | grep -oP "(?<=-).+")
 
@@ -67,9 +67,10 @@ Provides:       livepatch = %{kernel_version_release}
 
 %description
 A set of kernel livepatches addressing CVEs present in Mariner's
-kernel version 5.15.48.1-1.cm2.
+kernel version 5.15.32.1-3.cm2.
 
 Patches list ('*' - fixed, '!' - unfixable through livepatching, kernel update required):
+*CVE-2022-32250
 *CVE-2022-34918
 
 %install
@@ -100,9 +101,9 @@ install -m 744 %{SOURCE0} %{buildroot}%{livepatch_module_path}
 %{livepatch_module_path}
 
 %changelog
-* Fri Sep 30 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
-- Adding CVE fix.
+* Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
+- Applying CVE patches.
 
-* Fri Sep 30 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-1
+* Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-1
 - Original version for CBL-Mariner.
 - License verified.

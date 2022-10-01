@@ -1,4 +1,4 @@
-%define kernel_version_release 5.15.48.1-1.cm2
+%define kernel_version_release 5.15.48.1-4.cm2
 %define kernel_version %(echo %{kernel_version_release} | grep -oP "^[^-]+")
 %define kernel_release %(echo %{kernel_version_release} | grep -oP "(?<=-).+")
 
@@ -41,7 +41,7 @@ URL:            https://github.com/microsoft/CBL-Mariner
 Source0:        https://github.com/microsoft/CBL-Mariner-Linux-Kernel/archive/rolling-lts/mariner-2/%{kernel_version}.tar.gz#/kernel-%{kernel_version}.tar.gz
 Source1:        config-%{kernel_version_release}
 Source2:        mariner-%{kernel_version_release}.pem
-Patch1:         CVE-2022-34918.patch
+Patch0:         CVE-2022-34918.patch
 
 
 ExclusiveArch:  x86_64
@@ -126,9 +126,9 @@ install -m 744 %{livepatch_module_name} %{buildroot}%{livepatch_module_path}
 %endif
 
 %changelog
-* Fri Sep 30 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
-- Adding CVE fix.
+* Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
+- Applying CVE patch.
 
-* Fri Sep 30 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-1
+* Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-1
 - Original version for CBL-Mariner.
 - License verified.
