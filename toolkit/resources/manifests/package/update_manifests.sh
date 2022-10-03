@@ -206,6 +206,7 @@ generate_pkggen_core () {
     # $1 = (pkggen_core_x86_64.txt or pkggen_core_aarch64.txt)
     {
         grep "^filesystem-" $TmpPkgGen
+        grep "^kernel-headers-" $TmpPkgGen
         grep "^glibc-" $TmpPkgGen
         grep "^zlib-" $TmpPkgGen
         grep "^file-" $TmpPkgGen
