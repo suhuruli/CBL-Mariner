@@ -90,7 +90,7 @@ kernel version %{kernel_version_release}.
 %if %{builds_module}
 
 %prep
-%setup -q -n CBL-Mariner-Linux-Kernel-rolling-lts-mariner-2-%{kernel_version}
+%setup -q -n CBL-Mariner-Linux-Kernel-rolling-lts-mariner-%{kernel_version}
 
 cp %{SOURCE1} .config
 cp %{SOURCE2} certs/mariner.pem
