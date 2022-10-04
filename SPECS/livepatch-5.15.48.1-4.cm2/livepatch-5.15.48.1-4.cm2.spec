@@ -64,7 +64,7 @@ fi
 Summary:        Set of livepatches for kernel %{kernel_version_release}
 Name:           livepatch-%{kernel_version_release}
 Version:        1.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        MIT
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -182,6 +182,9 @@ install -m 744 %{livepatch_module_name} %{buildroot}%{livepatch_module_path}
 %endif
 
 %changelog
+* Tue Oct 04 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-3
+- Triggering re-build.
+
 * Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
 - Applying CVE patch.
 
