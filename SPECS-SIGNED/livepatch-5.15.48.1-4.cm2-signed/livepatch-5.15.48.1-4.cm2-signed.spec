@@ -67,7 +67,7 @@ Provides:       livepatch = %{kernel_version_release}
 
 %description
 A set of kernel livepatches addressing CVEs present in Mariner's
-kernel version 5.15.48.1-4.cm2.
+5.15.48.1-4.cm2 kernel.
 
 Patches list ('*' - fixed, '!' - unfixable through livepatching, kernel update required):
 *CVE-2022-34918
