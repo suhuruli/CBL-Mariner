@@ -1,3 +1,6 @@
+# The default %%__os_install_post macro ends up stripping the signatures off of the kernel module.
+%define __os_install_post %{__os_install_post_leave_signatures} %{nil}
+
 %global debug_package %{nil}
 
 %define kernel_version_release 5.15.48.1-4.cm2
@@ -43,7 +46,7 @@ then \
 fi
 
 Summary:        Set of livepatches for kernel %{kernel_version_release}
-Name:           livepatch-%{kernel_version_release}
+Name:           livepatch-%{kernel_version_release}-signed
 Version:        1.0.0
 Release:        3%{?dist}
 License:        MIT
@@ -55,6 +58,16 @@ Source0:        https://github.com/microsoft/CBL-Mariner-Linux-Kernel/archive/ro
 
 ExclusiveArch:  x86_64
 
+%description
+A set of kernel livepatches addressing CVEs present in Mariner's
+5.15.48.1-4.cm2 kernel.
+
+Patches list ('*' - fixed, '!' - unfixable through livepatching, kernel update required):
+*CVE-2022-34918
+
+%package -n     livepatch-%{kernel_version_release}
+Summary:        %{summary}
+
 Requires:       coreutils
 Requires:       livepatching-filesystem
 
@@ -65,7 +78,7 @@ Requires(preun): kpatch
 
 Provides:       livepatch = %{kernel_version_release}
 
-%description
+%description -n livepatch-%{kernel_version_release}
 A set of kernel livepatches addressing CVEs present in Mariner's
 5.15.48.1-4.cm2 kernel.
 
@@ -76,25 +89,25 @@ Patches list ('*' - fixed, '!' - unfixable through livepatching, kernel update r
 install -dm 755 %{buildroot}%{livepatch_install_dir}
 install -m 744 %{SOURCE0} %{buildroot}%{livepatch_module_path}
 
-%post
+%post -n livepatch-%{kernel_version_release}
 %load_if_should
 %install_if_should
 
-%preun
+%preun -n livepatch-%{kernel_version_release}
 %uninstall_if_should
 %unload_if_should
 
 # Re-enable patch on rollbacks to supported kernel.
-%triggerin -- kernel = %{kernel_version_release}
+%triggerin -n livepatch-%{kernel_version_release} -- kernel = %{kernel_version_release}
 %load_if_should
 %install_if_should
 
 # Prevent the patch from being loaded after a reboot to a different kernel.
 # Previous kernel is still running, do NOT unload the livepatch.
-%triggerin -- kernel > %{kernel_version_release}, kernel < %{kernel_version_release}
+%triggerin -n livepatch-%{kernel_version_release} -- kernel > %{kernel_version_release}, kernel < %{kernel_version_release}
 %uninstall_if_should
 
-%files
+%files -n livepatch-%{kernel_version_release}
 %defattr(-,root,root)
 %dir %{livepatch_install_dir}
 %{livepatch_module_path}
