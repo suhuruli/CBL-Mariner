@@ -1,5 +1,11 @@
 # The default %%__os_install_post macro ends up stripping the signatures off of the kernel module.
-%define __os_install_post %{nil}
+%define __os_install_post \
+    %{_rpmconfigdir}/brp-compress \
+    %{_rpmconfigdir}/brp-strip-comment-note %{__strip} %{__objdump} \
+    %{_rpmconfigdir}/brp-strip-static-archive %{__strip} \
+    %{?py_auto_byte_compile:%{?__brp_python_bytecompile}} \
+    find %{buildroot} -name "*.pc" | xargs -I{} sed -i -e 's@-Wl,-dT,%{_topdir}/BUILD/module_info.ld@ @' {} \
+    %{nil}
 
 %global debug_package %{nil}
 
