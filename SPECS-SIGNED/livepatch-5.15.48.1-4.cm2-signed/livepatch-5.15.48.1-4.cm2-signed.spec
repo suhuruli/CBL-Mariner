@@ -3,6 +3,8 @@
     echo "Pre-strip size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
     %{_rpmconfigdir}/brp-compress \
     echo "Post-compress size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
+    %{_rpmconfigdir}/brp-strip %{__strip} \
+    echo "Post-strip size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
     %{_rpmconfigdir}/brp-strip-comment-note %{__strip} %{__objdump} \
     echo "Post-strip-comment-note size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
     %{_rpmconfigdir}/brp-strip-static-archive %{__strip} \
