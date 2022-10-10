@@ -1,19 +1,5 @@
 # The default %%__os_install_post macro ends up stripping the signatures off of the kernel module.
-%define __os_install_post \
-    echo "Pre-strip size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{_rpmconfigdir}/brp-compress \
-    echo "Post-compress size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{_rpmconfigdir}/brp-strip %{__strip} \
-    echo "Post-strip size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{_rpmconfigdir}/brp-strip-comment-note %{__strip} %{__objdump} \
-    echo "Post-strip-comment-note size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{_rpmconfigdir}/brp-strip-static-archive %{__strip} \
-    echo "Post-strip-static-archive size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{?py_auto_byte_compile:%{?__brp_python_bytecompile}} \
-    echo "Post-py-auto-byte-compile size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    find %{buildroot} -name "*.pc" | xargs -I{} sed -i -e 's@-Wl,-dT,%{_topdir}/BUILD/module_info.ld@ @' {} \
-    echo "Post-find-pc size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")" \
-    %{nil}
+%define __os_install_post %{__os_install_post_leave_signatures} %{nil}
 
 %global debug_package %{nil}
 
@@ -102,12 +88,8 @@ Patches list ('*' - fixed, '!' - unfixable through livepatching, kernel update r
 *CVE-2022-34918
 
 %install
-echo "Pre-install size: $(stat --printf="%s" "%{SOURCE0}")"
-
 install -dm 755 %{buildroot}%{livepatch_install_dir}
 install -m 744 %{SOURCE0} %{buildroot}%{livepatch_module_path}
-
-echo "Post-install size: $(stat --printf="%s" "%{buildroot}%{livepatch_module_path}")"
 
 %post -n %{livepatch_unsigned_name}
 %load_if_should
