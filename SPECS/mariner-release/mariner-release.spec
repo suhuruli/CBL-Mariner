@@ -1,7 +1,7 @@
 Summary:        CBL-Mariner release files
 Name:           mariner-release
 Version:        2.0
-Release:        23%{?dist}
+Release:        24%{?dist}
 License:        MIT
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -52,6 +52,11 @@ cat > %{buildroot}%{_sysconfdir}/issue.net <<- EOF
 Welcome to CBL-Mariner %{mariner_release_version} (%{_arch})
 EOF
 
+mkdir -p %{buildroot}%{_rpmconfigdir}/macros.d
+cat > %{buildroot}%{_rpmconfigdir}/macros.d/macros.dist <<- EOF
+%%dist %{dist}
+EOF
+
 %files
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/mariner-release
@@ -60,8 +65,12 @@ EOF
 %config(noreplace) %{_sysconfdir}/os-release
 %config(noreplace) %{_sysconfdir}/issue
 %config(noreplace) %{_sysconfdir}/issue.net
+%attr(644,root,root) %{_rpmconfigdir}/macros.d/macros.dist
 
 %changelog
+* Mon Oct 10 2022 Daniel McIlvaney <damcilva@microsoft.com> - 2.0-24
+- Create a macro file to persistently define %%{dist} outside the build environment
+
 * Fri Oct 07 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 2.0-23
 - Updating version for October release.
 
