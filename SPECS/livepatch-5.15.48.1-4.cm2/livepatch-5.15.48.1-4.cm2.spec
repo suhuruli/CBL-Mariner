@@ -64,7 +64,7 @@ fi
 Summary:        Set of livepatches for kernel %{kernel_version_release}
 Name:           livepatch-%{kernel_version_release}
 Version:        1.0.0
-Release:        3%{?dist}
+Release:        2%{?dist}
 License:        MIT
 Vendor:         Microsoft Corporation
 Distribution:   Mariner
@@ -186,11 +186,8 @@ addressing CVEs present in Mariner's %{kernel_version_release} kernel.
 %endif
 
 %changelog
-* Tue Oct 04 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-3
-- Triggering re-build.
-
 * Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-2
-- Applying CVE patch.
+- Patching CVE-2022-34918.
 
 * Sat Oct 01 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 1.0.0-1
 - Original version for CBL-Mariner.
