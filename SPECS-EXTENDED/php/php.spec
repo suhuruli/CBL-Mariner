@@ -39,8 +39,8 @@
 
 Summary:        PHP scripting language for creating dynamic web sites
 Name:           php
-Version:        7.4.14
-Release:        3%{?dist}
+Version:        7.4.25
+Release:        1%{?dist}
 # All files licensed under PHP version 3.01, except
 # Zend is licensed under Zend
 # TSRM is licensed under BSD
@@ -1646,6 +1646,9 @@ systemctl try-restart php-fpm.service >/dev/null 2>&1 || :
 %dir %{_datadir}/php/preload
 
 %changelog
+* Tue Oct 11 2022 CBL-Mariner Servicing Account <cblmargh@microsoft.com> - 7.4.25-1
+- Upgrade to 7.4.25
+
 * Thu Jun 02 2022 Pawel Winogrodzki <pawelwi@microsoft.com> - 7.4.14-3
 - Adding a patch to work with "gd" 2.3.3+.
 - License verified.

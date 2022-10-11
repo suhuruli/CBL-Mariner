@@ -19254,8 +19254,8 @@
         "type": "other",
         "other": {
           "name": "php",
-          "version": "7.4.14",
-          "downloadUrl": "https://www.php.net/distributions/php-7.4.14.tar.xz"
+          "version": "7.4.25",
+          "downloadUrl": "https://www.php.net/distributions/php-7.4.25.tar.xz"
         }
       }
     },
